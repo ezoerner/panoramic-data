@@ -1,0 +1,52 @@
+name:                panoramic-data
+version:             0.1.0.0
+github:              "ezoerner/panoramic-data"
+license:             BSD-3-Clause
+author:              "Eric Zoerner"
+maintainer:          "eric.zoerner@proton.me"
+copyright:           "Copyright (c) 2023 Eric Zoerner"
+language:            GHC2021
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Examples
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/ezoerner/panoramic-data#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- text
+- either
+- digits
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+tests:
+  panoramic-data-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - panoramic-data
