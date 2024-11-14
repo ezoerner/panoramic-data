@@ -1,9 +1,11 @@
--- | Types are re-exported in Person module, but only the validating constructor
--- methods are exported to prevent invalid data from being represented.
+-- | Types are re-exported in (public) Person module, but only the validating
+-- constructor methods are exported to prevent invalid data from being represented.
+-- The internal constructors are exported here to allow internal code to access,
+-- e.g. tests.
 module Person.Types
   ( MaritalStatus (..),
-    PhoneNumber,
-    SocialSecurityNumber,
+    PhoneNumber (..),
+    SocialSecurityNumber (..),
     PersonError (..),
     mkPhoneNumber,
     mkSocialSecurityNumber,

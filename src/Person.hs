@@ -2,7 +2,7 @@
 -- Only the validating constructors are exported to make sure no invalid data
 -- can be represented.
 --
--- A Person is constructed by calling validatePerson.
+-- A Person is constructed by calling 'validatePerson'.
 module Person
   ( module Person.EditPerson,
     MaritalStatus (..),
@@ -16,7 +16,7 @@ where
 import Data.Either.Validation (Validation (..))
 import Data.Text (Text)
 import Data.Text qualified as T
-import Person.EditPerson
+import Person.EditPerson (EditPerson (..))
 import Person.Types
   ( MaritalStatus (..),
     PersonError (EmptyFirstName, EmptyLastName),
@@ -25,15 +25,7 @@ import Person.Types
     mkPhoneNumber,
     mkSocialSecurityNumber,
   )
-
-data Person = Person
-  { firstName :: Text,
-    lastName :: Text,
-    ssn :: SocialSecurityNumber,
-    martialStatus :: MaritalStatus,
-    usPhoneNumber :: PhoneNumber
-  }
-  deriving (Eq, Show)
+import Person.ValidPerson (Person (..))
 
 -- | Construct a valid Person or return a Failure with a list of errors
 validatePerson :: EditPerson -> Validation [PersonError] Person

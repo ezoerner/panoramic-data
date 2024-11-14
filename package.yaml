@@ -39,6 +39,12 @@ ghc-options:
 
 library:
   source-dirs: src
+  dependencies: person-internal
+
+
+internal-libraries:
+  person-internal:
+    source-dirs: src-internal
 
 tests:
   panoramic-data-test:
@@ -50,3 +56,5 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - panoramic-data
+    - person-internal
+    - HUnit
