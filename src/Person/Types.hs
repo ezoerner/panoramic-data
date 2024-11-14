@@ -1,5 +1,5 @@
 -- | Types are re-exported in Person module, but only the validating constructor
--- methods are exported to prevent invalid data from being respresented.
+-- methods are exported to prevent invalid data from being represented.
 module Person.Types
   ( MaritalStatus (..),
     PhoneNumber,
