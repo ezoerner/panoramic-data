@@ -5,3 +5,8 @@ Only the validating constructors are exported to make sure no invalid data
 can be represented.
 
 A Person is constructed by calling the `validatePerson` function.
+
+
+## BUILDING
+
+Build with Haskell stack.
