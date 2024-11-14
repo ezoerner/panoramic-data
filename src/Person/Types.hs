@@ -10,7 +10,7 @@ module Person.Types
   )
 where
 
-import Data.Digits (digits)
+import Data.Digits (digits, unDigits)
 import Data.Either.Validation (Validation (..))
 import Data.List (intercalate)
 
@@ -63,13 +63,25 @@ data PersonError
 -- This is stubbed out and only checks to make sure the number has ten digits total.
 -- A full implemention should validate the area code and exchange as well.
 mkPhoneNumber :: Int -> Validation [PersonError] PhoneNumber
-mkPhoneNumber num
-  | length (digits 10 num) == 10 = Success $ PhoneNumber 123 555 1212
-  | otherwise = Failure [InvalidPhoneNumber]
+mkPhoneNumber num =
+  let base = 10
+      dgts = digits base num
+      anyNegative = any (< 0) dgts
+      wrongNumDigits = length dgts /= 10
+      pref = fromIntegral . unDigits base $ take 3 dgts
+      exch = fromIntegral . unDigits base $ take 3 (drop 3 dgts)
+      rest = fromIntegral . unDigits base $ drop 6 dgts
+   in if anyNegative || wrongNumDigits
+        then Failure [InvalidPhoneNumber]
+        else Success $ PhoneNumber pref exch rest
 
 -- | Construct a valid Social Security Number
 -- A social security number must have 9 digits
 mkSocialSecurityNumber :: Int -> Validation [PersonError] SocialSecurityNumber
-mkSocialSecurityNumber num
-  | length (digits 10 num) == 9 = Success $ SocialSecurityNumber num
-  | otherwise = Failure [InvalidSSN]
+mkSocialSecurityNumber num =
+  let dgts = digits 10 num
+      anyNegative = any (< 0) dgts
+      wrongNumDigits = length dgts /= 9
+   in if anyNegative || wrongNumDigits
+        then Failure [InvalidSSN]
+        else Success (SocialSecurityNumber num)
