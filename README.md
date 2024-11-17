@@ -9,6 +9,6 @@ can be represented.
 A Person is constructed by calling the `validatePerson` function.
 
 
-## BUILDING
+## BUILD
 
-Build with Haskell stack.
+Build with Haskell `stack`.
